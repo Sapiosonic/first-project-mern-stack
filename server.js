@@ -5,6 +5,7 @@ let db;
 const app = express();
 app.set("view engine", "ejs");
 app.set("views", "./views");
+app.use(express.static("public"));
 
 app.get("/", async (request, response) => {
   const allAnimals = await db.collection("animals").find().toArray();
@@ -12,7 +13,7 @@ app.get("/", async (request, response) => {
 });
 
 app.get("/admin", (request, response) => {
-  response.send("This is the top secret admin page!");
+  response.render("admin");
 });
 
 async function start() {
