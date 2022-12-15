@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Sapiosonic/first-project-mern-stack/issues"
   },
-  "homepage": "https://github.com/Sapiosonic/first-project-mern-stack#readme"
+  "homepage": "https://github.com/Sapiosonic/first-project-mern-stack#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
