@@ -7,10 +7,23 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 app.use(express.static("public"));
 
+function passwordProtected(request, response, next) {
+  response.set("WWW-Authenticate", "Basic realm= 'Our MERN App'");
+  if (request.headers.authorization == "Basic YWRtaW46YWRtaW4=") {
+    next();
+  } else {
+    console.log(request.headers.authorization);
+    response.status(401).send("Try again");
+  }
+}
+
 app.get("/", async (request, response) => {
   const allAnimals = await db.collection("animals").find().toArray();
   response.render("home", { allAnimals })
 });
+
+//All the routes after this function will be password protected.
+app.use(passwordProtected);
 
 app.get("/admin", (request, response) => {
   response.render("admin");
